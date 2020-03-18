@@ -3,10 +3,6 @@ spring:
   #   url: jdbc:postgresql://localhost:5532/agent
   #   username: postgres
   #   password: postgres
-  servlet:
-    multipart:
-      max-file-size: 128KB
-      max-request-size: 128KB
   liquibase:
     change-log: classpath:/db/changelog/db.changelog-master.xml
     contexts: schema-change
