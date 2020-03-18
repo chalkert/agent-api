@@ -22,7 +22,6 @@ services:
       spring.datasource.password: brf
       spring.liquibase.user: brf
       spring.liquibase.password: brf
-      spring.liquibase.contexts: schema-change
 
 # Start with: docker-compose up --build --force-recreate --no-deps
 # Stop with: docker-compose down
