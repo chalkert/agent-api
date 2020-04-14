@@ -54,4 +54,18 @@ public class AgentCrudIT extends DBBackedIntegrationTest {
     assertNull(find(Agent.class, id));
   }
 
+  @Test
+  public void save_TrimsOnInsert() {
+    Agent agent = AgentFactory.newAgent().build();
+
+    String expected = "Trimmed String";
+    agent.setDisplayName("    " + expected + "    ");
+    agent.setEmail("          " + expected + "    ");
+
+    save(agent);
+    Agent persistedAgent = find(Agent.class, agent.getId());
+
+    assertEquals(expected, persistedAgent.getDisplayName());
+    assertEquals(expected, persistedAgent.getEmail());
+  }
 }

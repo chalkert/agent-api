@@ -11,6 +11,7 @@ import javax.persistence.PrePersist;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.ColumnTransformer;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
 
@@ -45,9 +46,11 @@ public class Agent {
   private UUID uuid;
 
   @NotBlank
+  @ColumnTransformer(write = "TRIM(?)")
   private String displayName;
 
   @NotBlank
+  @ColumnTransformer(write = "TRIM(?)")
   private String email;
 
   @PrePersist
