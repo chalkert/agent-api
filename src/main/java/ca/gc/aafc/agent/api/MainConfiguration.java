@@ -16,7 +16,6 @@ import ca.gc.aafc.dina.DinaBaseApiAutoConfiguration;
 import ca.gc.aafc.dina.dto.RelatedEntity;
 import ca.gc.aafc.dina.jpa.BaseDAO;
 import ca.gc.aafc.dina.mapper.JpaDtoMapper;
-import ca.gc.aafc.dina.repository.SelectionHandler;
 import ca.gc.aafc.dina.util.ClassAnnotationHelper;
 
 @Configuration
@@ -30,7 +29,7 @@ public class MainConfiguration {
    * @return the DtoJpaMapper
    */
   @Bean
-  public JpaDtoMapper dtoJpaMapper(SelectionHandler selectionHandler, BaseDAO baseDAO) {
+  public JpaDtoMapper dtoJpaMapper(BaseDAO baseDAO) {
     Map<Class<?>, List<JpaDtoMapper.CustomFieldResolverSpec<?>>> customFieldResolvers = new HashMap<>();
 
     // Map all DTOs to their related Entities.
@@ -42,7 +41,7 @@ public class MainConfiguration {
           Function.identity(),
           clazz -> clazz.getAnnotation(RelatedEntity.class).value()));
 
-    return new JpaDtoMapper(entitiesMap, customFieldResolvers, selectionHandler);
+    return new JpaDtoMapper(entitiesMap, customFieldResolvers);
   }
 
 }
