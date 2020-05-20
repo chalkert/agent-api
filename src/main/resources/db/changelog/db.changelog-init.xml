@@ -23,7 +23,7 @@
 			</column>
 		</createTable>
 
-		<!-- Alter unquie constraint for agent to be case insensitive-->
+		<!-- Add case insensitive unique indices on display_name and email-->
 		<sql>
 			CREATE UNIQUE INDEX agent_unique_name
 			ON agent (lower(display_name));
