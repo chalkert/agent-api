@@ -41,7 +41,7 @@ public class Agent {
 
   @NaturalId
   @NotNull
-  @Column(name = "uuid")
+  @Column(name = "uuid", unique = true)
   private UUID uuid;
 
   @NotBlank
