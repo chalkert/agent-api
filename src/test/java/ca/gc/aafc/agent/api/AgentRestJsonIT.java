@@ -252,18 +252,25 @@ public class AgentRestJsonIT extends DBBackedIntegrationTest {
    * @param responseJson The response json from service
    */
   private void validateJsonSchema(String responseJson) {
-    try {
-      URIBuilder uriBuilder = new URIBuilder();
-      uriBuilder.setScheme("https");
-      uriBuilder.setHost(SPEC_HOST);
-      uriBuilder.setPath(SPEC_PATH);
-      log.info(
-        "Validating {} schema against the following response: {}",
-        () -> SCHEMA_NAME,
-        () -> responseJson);
-      OpenAPI3Assertions.assertSchema(uriBuilder.build().toURL(), SCHEMA_NAME, responseJson); 
-    } catch (URISyntaxException | MalformedURLException e) {
-      log.error(e);
+    if (!Boolean.valueOf(System.getProperty("testing.skip-external-schema-validation"))) {
+      try {
+        URIBuilder uriBuilder = new URIBuilder();
+        uriBuilder.setScheme("https");
+        uriBuilder.setHost(SPEC_HOST);
+        uriBuilder.setPath(SPEC_PATH);
+        log.info(
+          "Validating {} schema against the following response: {}",
+          () -> SCHEMA_NAME,
+          () -> responseJson);
+        OpenAPI3Assertions.assertSchema(uriBuilder.build().toURL(), SCHEMA_NAME, responseJson);
+      } catch (URISyntaxException | MalformedURLException e) {
+        log.error(e);
+      }
+    } else {
+      log.warn(
+        "Skipping schema validation." + 
+        "System property testing.skip-external-schema-validation set to true. "
+        );
     }
   }
 }
