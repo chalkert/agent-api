@@ -49,7 +49,7 @@ public class AgentCrudIT extends DBBackedIntegrationTest {
 
   @Test
   public void testRemove() {
-    Integer id = agentUnderTest.getId();
+    Long id = agentUnderTest.getId();
     deleteById(Agent.class, id);
     assertNull(find(Agent.class, id));
   }

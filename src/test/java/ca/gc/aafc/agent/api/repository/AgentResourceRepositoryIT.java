@@ -34,7 +34,7 @@ import io.crnk.core.queryspec.QuerySpec;
 public class AgentResourceRepositoryIT extends DBBackedIntegrationTest {
 
   @Inject
-  private AgentResourceRepository agentResourceRepository;
+  private AgentDinaRepo agentResourceRepository;
 
   private Agent agentUnderTest;
 
