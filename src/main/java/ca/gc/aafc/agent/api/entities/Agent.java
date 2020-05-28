@@ -38,7 +38,7 @@ public class Agent implements DinaEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  private Integer id;
 
   @NaturalId
   @NotNull
