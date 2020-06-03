@@ -2,7 +2,6 @@ package ca.gc.aafc.agent.api;
 
 import static io.restassured.RestAssured.given;
 
-import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -11,8 +10,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
-
-import com.google.common.collect.ImmutableMap;
 
 import org.apache.http.client.utils.URIBuilder;
 import org.hamcrest.Matchers;
@@ -25,10 +22,12 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.google.common.collect.ImmutableMap;
+
 import ca.gc.aafc.agent.api.entities.Agent;
-import ca.gc.aafc.agent.api.utils.TestUtils;
 import ca.gc.aafc.dina.testsupport.DBBackedIntegrationTest;
 import ca.gc.aafc.dina.testsupport.factories.TestableEntityFactory;
+import ca.gc.aafc.dina.testsupport.jsonapi.JsonAPITestHelper;
 import ca.gc.aafc.dina.testsupport.specs.OpenAPI3Assertions;
 import io.crnk.core.engine.http.HttpStatus;
 import io.restassured.RestAssured;
@@ -227,7 +226,7 @@ public class AgentRestJsonIT extends DBBackedIntegrationTest {
     ImmutableMap.Builder<String, Object> objAttribMap = new ImmutableMap.Builder<>();
     objAttribMap.put("displayName", displayName);
     objAttribMap.put("email", email);
-    return TestUtils.toJsonAPIMap("agent", objAttribMap.build(), null);
+    return JsonAPITestHelper.toJsonAPIMap("agent", objAttribMap.build(),null, null);
   }
 
   /**
